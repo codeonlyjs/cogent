@@ -1,0 +1,9 @@
+export let config = {
+
+    appName: "{{model.name}}",
+
+    server: {
+        // Server specific settings go here and will not be passed to client
+    }
+
+}
