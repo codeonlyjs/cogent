@@ -10,7 +10,9 @@ base: ./{{model.name}}/
   "scripts": {
     "build": "cd client && vite build",
     "dev": "node ./server/server.js",
-    "prod": "bash -c \"npm run build && NODE_ENV=production node ./server/server.js\""
+    "prod": "bash -c \"npm run build && NODE_ENV=production node ./server/server.js\"",
+    "up": "npm run build && docker-compose up --build -d",
+    "down": "docker-compose down"
   },
   "author": "",
   "license": "Apache-2.0",

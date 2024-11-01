@@ -7,7 +7,7 @@ export default defineConfig({
     outDir: './dist',
     rollupOptions: {
       external: [
-        "./config.js"
+        "/config.js"
       ],
     },
   },

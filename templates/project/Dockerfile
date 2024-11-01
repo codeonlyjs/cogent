@@ -1,12 +1,13 @@
 FROM node:latest
 
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt update && apt upgrade && rm -rf /var/lib/apt/lists/*
-
 WORKDIR /usr/src/app/website
 COPY client/dist ./client/dist/
 COPY server ./server/
 COPY package* ./
+
+# Uncommenting the following line can speed up
+# npm install significantly.
+# RUN npm config set strict-ssl false
 RUN npm install --omit=dev --loglevel verbose
 
 EXPOSE 3000
