@@ -14,8 +14,8 @@
             "program": "${workspaceFolder}\\index.js",
             "args": [
                 "new",
-                "component",
-                "TestPage",
+                "webapp",
+                "TestApp",
             ]
         }
     ]

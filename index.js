@@ -13,13 +13,13 @@ Object.assign(moe.helpers, inflection);
 // Load the specified template file
 async function loadTemplate(name)
 {
-    let base = path.join(__dirname, `templates/${name}/`);
+    let inbase = path.join(__dirname, `templates/${name}/`);
     try
     {
-        let stat = fs.statSync(base);
+        let stat = fs.statSync(inbase);
         if (stat.isDirectory())
             return {
-                base,
+                inbase,
                 params: {},
             }
     }
@@ -28,7 +28,7 @@ async function loadTemplate(name)
         throw new Error(`template '${name}' not found (${err.message})`);
     }
 
-    throw new Error(`'${base}' is not a directory`);
+    throw new Error(`'${inbase}' is not a directory`);
 }
 
 // Parse arguments and return a template to process
@@ -107,44 +107,60 @@ function mkdirp(targetDir)
 async function generateTemplate(template)
 {
     // Get all files
-    let files = fs.readdirSync(template.base, { recursive: true });
+    let files = fs.readdirSync(template.inbase, { recursive: true });
 
-    let outputs = [];
-
-    let base = null;
+    template.outputs = [];
+    template.outbase = null;
+    let script;
 
     // Process each file
     for (let i=0; i<files.length; i++)
     {
-        let srcFile = path.join(template.base, files[i]);
+        let srcFile = path.join(template.inbase, files[i]);
 
         // Ignore directories
         let stat = fs.statSync(srcFile);
         if (stat.isDirectory())
             continue;
 
+        // Script file
+        if (files[i] === ".template.js")
+        {
+            script = await import("file://" + srcFile);
+            continue;
+        }
+
         // load file
         let src = fs.readFileSync(srcFile, "utf8");
 
+        // Create output
+        let output = {
+            src,
+            out: files[i],
+        }
+        template.outputs.push(output);
+
         // moejs file?
-        let output;
         if (files[i].endsWith(".moe"))
         {
-            // Generate template
-            let fileTemplate = moe.compile(src);
+            output.template = moe.compile(src);
+            output.out = output.out.substring(0, output.out.length - 4);
+        }
+    }
 
-            // Store output
-            output = {
-                content: fileTemplate(template.params),
-                out: files[i].substring(0, files[i].length - 4),
-            };
+    // Call pre-generate
+    await script?.preGenerate?.(template);
+
+    // Generate
+    for (let output of template.outputs)
+    {
+        if (output.template)
+        {
+            output.content = output.template(template.params);
         }
         else
         {
-            output = {
-                content: src,
-                out: files[i],
-            };
+            output.content = output.src;
         }
 
         // Get file front matter
@@ -159,45 +175,51 @@ async function generateTemplate(template)
             output.out = output.frontmatter.out;
         if (output.frontmatter.base)
         {
-            if (base != null && base != output.frontmatter.base)
+            if (template.outbase != null && template.outbase != output.frontmatter.base)
                 throw new Error("Multiple conflicting `base` settings");
-            base = output.frontmatter.base;
+            template.outbase = output.frontmatter.base;
         }
-
-        outputs.push(output);
-
     }
 
-    if (base != null)
+    // Call post generate
+    await script?.postGenerate?.(template);
+
+    // Apply out base directory
+    if (template.outbase != null)
     {
-        for (let o of outputs)
+        for (let o of template.outputs)
         {
-            o.out = path.join(base, o.out);
+            o.out = path.join(template.outbase, o.out);
         }
     }
 
     // Check not files already exist
     let existing = false;
-    for (let o of outputs)
+    for (let o of template.outputs)
     {
         if (fs.existsSync(o.out))
         {
             console.error(`exists: ${o.out}`);
             existing = true;
         }
-
     }
 
     if (existing)
         throw new Error(`One or more files already exists, aborting`);
 
+    // Call preWrite
+    await script?.preWrite?.(template);
+
     // Save
-    for (let o of outputs)
+    for (let o of template.outputs)
     {
         mkdirp(path.dirname(o.out));
         fs.writeFileSync(o.out, o.content, "utf8");
         console.error(`created: ${o.out}`);
     }
+
+    // Call postWrite
+    await script?.postWrite?.(template);
 }
 
 // Parse args
