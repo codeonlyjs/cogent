@@ -1,4 +1,4 @@
-import { Component, Style } from "codeonly";
+import { Component, Style } from "@codeonlyjs/core";
 import { router } from "./router.js";
 import { Header } from "./Header.js";
 

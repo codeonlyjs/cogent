@@ -65,7 +65,7 @@ else
         path: path.join(__dirname, "../client"),
         spa: true,
         modules: [ 
-            "codeonly",
+            "@codeonlyjs/core",
         ],
         replace: [
             { from: "./Main.js", to: "/Main.js" },

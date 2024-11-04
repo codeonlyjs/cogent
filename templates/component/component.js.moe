@@ -1,7 +1,7 @@
 ---
 out: {{model.name}}.js
 ---
-import { Component, Style } from "codeonly";
+import { Component, Style } from "@codeonlyjs/core";
 
 export class {{model.name}} extends Component
 {

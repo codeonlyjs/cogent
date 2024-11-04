@@ -1,4 +1,4 @@
-import { Component, Style } from "codeonly";
+import { Component, Style } from "@codeonlyjs/core";
 import { config } from "/config.js";
 
 // The main header
