@@ -4,7 +4,7 @@
 
 In VS Code:
 
-    * just run the project, we've already configured `.vscode/launch.json`
+    * Just run the project (it'll run under nodemon)
 
 From the command line:
 
@@ -30,7 +30,8 @@ The `client` directory contains the client side scripts for your app:
 The `server` directory contains the ExpressJS server:
 
 * `server.js` - the main entry point to the server
-* `config.js` - configuration settings available to both the server and client apps.
+* `config.js` - configuration settings available to both the server and client apps
+* `api.js` - route handler for `/api` routes
 * `public\favicon.svg` - favicon for the site (defaults to CodeOnly logo)
 * `public\logo.svg` - logo use in top-left of the site's header (defaults to CodeOnly logo)
 

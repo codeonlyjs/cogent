@@ -5,7 +5,9 @@ import 'express-async-errors';
 import { bundleFree } from '@toptensoftware/bundle-free';
 import livereload from 'livereload';
 import logger from "morgan";
+
 import { config } from "./config.js";
+import { api } from "./api.js";
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
@@ -13,7 +15,10 @@ const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 let app = express(); 
 
 // Enable logging
-app.use(logger('dev', { stream: { write: (m) => console.log(m.trimEnd()) } } ));
+if (app.get('env') === 'production')
+    app.use(logger('combined'));
+else
+    app.use(logger('dev', { stream: { write: (m) => console.log(m.trimEnd()) } } ));
 
 // Serve static files
 app.use("/", express.static(path.join(__dirname, "public")));
@@ -27,8 +32,15 @@ app.use("/config.js", (req, res) => {
     res.send(js);
 }); 
 
+// Routes
+app.use("/api", api);
+
+// NB: Routes should be registered before the following bundle-free code.
+// This is because bundle-free is configured to run "SPA" mode where 
+// unrecognized URLs cause client/index.html to be served.
+
 // Prod or Dev?
-if (process.env.NODE_ENV == "production")
+if (app.get('env') === 'production')
 {
     console.log("Running as production");
 
@@ -65,14 +77,14 @@ else
 
 // Not found
 app.use((req, res, next) => {
-    let err = new Error(`Not Found - ${req.url}`);
+    let err = new Error(`Not Found - ${req.originalUrl}`);
     err.status = 404;
     next(err);
 });
 
 // Start server
-let server = app.listen(3000, null, function () {
-    console.log(`Server running on [${server.address().address}]:${server.address().port} (${server.address().family})`);
+let server = app.listen(config.server.port, config.server.host, function () {
+    console.log(`Server running on [${server.address().address}]:${server.address().port}`);
 });
 
 
