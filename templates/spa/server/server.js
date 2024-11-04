@@ -1,6 +1,7 @@
 import path from 'node:path';
 import url from 'node:url';
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import 'express-async-errors';
 import { bundleFree } from '@toptensoftware/bundle-free';
 import livereload from 'livereload';
@@ -13,6 +14,11 @@ const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
 // Setup app
 let app = express(); 
+
+// Cookie and body parsers
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 // Enable logging
 if (app.get('env') === 'production')

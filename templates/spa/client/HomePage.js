@@ -12,8 +12,7 @@ export class HomePage extends Component
             Html.p("It worked! Your new project is up and running!"),
             Html.h(2, "Next Steps"),
             Html.p("If you're running in development mode, make some changes and notice the site automatically live reload when you save."),
-            Html.p(Html.raw("Run the site in production mode with <code>npm run prod</code>")),
-            Html.p(Html.raw("Run the site in docker with <code>npm run up</code>")),
+            Html.a("/api/people/3", "Example API Request"),
         ]
     }
 }
