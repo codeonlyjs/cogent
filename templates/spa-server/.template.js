@@ -8,6 +8,10 @@ export function postWrite(template)
         stdio: 'inherit',
     });
 
+    // Run npm install
+    console.log(`Installing NPM packages...`);
+    $`npm install`
+
     // Launch VS Code (if installed)
     if ($.which("code", {nothrow: true}))
     {

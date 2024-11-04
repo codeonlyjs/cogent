@@ -4,31 +4,22 @@ base: ./{{model.name}}/
 {
   "name": "{{model.name}}",
   "version": "0.0.1",
-  "description": "{{model.name}}",
-  "main": "index.js",
+  "description": "{{model.name}} Single Page App",
   "type": "module",
   "scripts": {
-    "build": "cd client && vite build",
-    "dev": "node ./server/server.js",
-    "prod": "bash -c \"npm run build && NODE_ENV=production node ./server/server.js\"",
-    "up": "npm run build && docker-compose up --build -d",
-    "down": "docker-compose down"
+    "build": "vite build",
+    "dev": "serve",
+    "dist": "npm run build && serve dist"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@toptensoftware/bundle-free": "^1.0.7",
-    "express": "^4.21.1",
-    "express-async-errors": "^3.1.1",
-    "cookie-parser": "^1.4.6",
-    "livereload": "^0.9.3",
-    "morgan": "^1.10.0",
-    "node-fetch-native": "^1.6.4"
   },
   "devDependencies": {
     "@codeonlyjs/core": "codeonlyjs/core",
-    "nodemon": "^3.1.7",
-    "vite": "^5.4.9"
+    "serve": "^14.2.4",
+    "vite": "^5.4.9",
+    "vite-plugin-static-copy": "^2.0.0"
   }
 }
 

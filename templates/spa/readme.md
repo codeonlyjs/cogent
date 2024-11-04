@@ -1,62 +1,87 @@
 # Welcome to Your New CodeOnly Project!
 
-## Run the Project
+Due to the way CORS policy works with JavaScript modules, you need to serve the
+site from a server - you can't just open the index.html file.
 
-In VS Code:
+There's two ways to easily do this:
 
-    * Just run the project (it'll run under nodemon)
+* from the command prompt with `npx serve` (easiest for quick testing) or
+* from VS Code with the Live Server extensions (best for development as it 
+  has live reload capability).
 
-From the command line:
 
-    * `npm run dev` - run the site in development mode
-    * `npm run prod` - run the site in production mode
 
-Once running, you can view your site at <http://localhost:3000>
+## Running with npx serve
+
+The easiest way to do this, if you have node installed is to run `npx serve`
+in the project directory.
+
+eg:
+
+```
+~/Projects/MyCodeOnlyProject$ npx serve
+
+   ┌─────────────────────────────────────────┐
+   │                                         │
+   │   Serving!                              │
+   │                                         │
+   │   - Local:    http://localhost:3000     │
+   │   - Network:  http://172.20.64.1:3000   │
+   │                                         │
+   │   Copied local address to clipboard!    │
+   │                                         │
+   └─────────────────────────────────────────┘
+```
+
+
+
+## Running in VS Code with Live Server
+
+Another way to run this project is to use VS Code with the 
+[Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension.
+
+This approach give's automatic live reloading in the browser when you save files.
+
+1. Open the project is VS Code
+2. Make sure the extension is installed
+3. Click the Go Live button (see Live Server documentation for more)
 
 
 
 ## Project Structure
 
-The `client` directory contains the client side scripts for your app:
+The project directory contains your client-side single-page app:
 
 * `index.html` - the root HTML document for the app
 * `Main.js` - the main entry point and top-level HTML layout of the site
 * `HomePage.js` - the home page component
 * `NotFoundPage.js` - the error page if the router can't find a matching route
+* `config.js` - configuration settings
 * `router.js` - the router
 * `Header` - the site header
-* `vide.config.js` - Vite configuration for bundling the production site
-
-The `server` directory contains the ExpressJS server:
-
-* `server.js` - the main entry point to the server
-* `config.js` - configuration settings available to both the server and client apps
-* `api.js` - route handler for `/api` routes
-* `public\favicon.svg` - favicon for the site (defaults to CodeOnly logo)
-* `public\logo.svg` - logo use in top-left of the site's header (defaults to CodeOnly logo)
+* `vite.config.js` - Vite configuration for bundling the production site
+* `favicon.svg` - favicon for the site (defaults to CodeOnly logo)
+* `logo.svg` - logo use in top-left of the site's header (defaults to CodeOnly logo)
 
 
+## Building for Distribution
 
-## Development vs Production Mode
+Once you're ready to ship your application you need to build it.  This will 
+bundle CodeOnly and your scripts into a single, optimized and minimized package.
 
-In development mode, the client app files are served directly by the ExpressJS.  It
-also serves configured NPM packages using [`bundle-free`](https://github.com/codeonlyjs/bundle-free) 
-(see server.js).
+To run the build:
 
-Also, in development mode the server runs [`live-reload`](https://www.npmjs.com/package/livereload) 
-so changes made in client folder are automatically reflected in connected browsers (see server.js for 
-configuration of live-reload).
+```
+~/Projects/MyCodeOnlyProject$ npm install
+~/Projects/MyCodeOnlyProject$ npm run build
+```
 
-Note that in development mode, an automatically modified version the `client/index.html` 
-file is served by bundle-free with the following changes:
+The output files will be placed in the `dist` sub-folder.  You can test it using
+`npm run dist`:
 
-* import maps are added to support references to NPM packages,
-* the live-reload script is added
-* other string replacements as configured in `server.js`
-
-In production mode, the client app is built/bundled using Vite and the server 
-serves the `client/dist` folder it produces.  The node_modules folder isn't
-served in production mode.
+```
+~/Projects/MyCodeOnlyProject$ npx run dist
+```
 
 
 
@@ -72,14 +97,5 @@ declared by Stylish, or make sure you include dark/light versions as appropriate
 Stylish is loaded via CDN.  To reduce the chances of possible future changes
 affecting your styling, you might want to copy those files to `server/public`
 and reference them from there.
-
-
-
-## Docker
-
-The project has been pre-configured to run in a docker container:
-
-    * `npm run up` - runs the site in production mode in a docker container
-    * `npm run down` - stops a previously started docker container
 
 
