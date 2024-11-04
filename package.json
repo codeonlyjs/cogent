@@ -1,14 +1,26 @@
+
 {
-  "name": "shownotes",
-  "version": "1.0.0",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "@codeonlyjs/cli",
+  "description": "CodeOnly Command Line Tools",
+  "version": "0.0.1",
+  "author": "Topten Software",
+  "contributors": [
+    {
+      "name": "Brad Robinson",
+      "email": "contact@toptensoftware.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/toptensoftware/inkscape-export"
   },
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "inkscape-export": "./index.js"
+  },
+  "preferGlobal": true,
   "dependencies": {
     "@toptensoftware/moe-js": "^0.4.0",
     "@toptensoftware/shex": "github:toptensoftware/shex",

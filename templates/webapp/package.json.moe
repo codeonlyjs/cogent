@@ -15,7 +15,7 @@ base: ./{{model.name}}/
     "down": "docker-compose down"
   },
   "author": "",
-  "license": "Apache-2.0",
+  "license": "ISC",
   "dependencies": {
     "@toptensoftware/bundle-free": "^1.0.7",
     "express": "^4.21.1",
