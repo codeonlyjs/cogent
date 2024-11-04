@@ -8,8 +8,10 @@ In VS Code:
 
 From the command line:
 
-    * `npm run dev` - runs the site in development mode
-    * `npm run prod` - runs the site in production mode
+    * `npm run dev` - run the site in development mode
+    * `npm run prod` - run the site in production mode
+
+Once running, you can view your site at <http://localhost:3000>
 
 
 
