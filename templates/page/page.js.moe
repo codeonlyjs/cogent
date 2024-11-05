@@ -1,0 +1,33 @@
+---
+out: {{model.name}}Page.js
+---
+import { Component, Style } from "@codeonlyjs/core";
+import { router } from "./router.js";
+
+export class {{model.name}}Page extends Component
+{
+    constructor()
+    {
+        super();
+    }
+
+    static template = {
+        type: "div",
+        class: "{{helpers.dasherize(helpers.underscore(model.name))}}-page",
+        text: "My Component",
+    }
+}
+
+Style.declare(`
+.{{helpers.dasherize(helpers.underscore(model.name))}}-page
+{
+}
+`);
+
+router.register({
+    pattern: "/{{helpers.dasherize(helpers.underscore(model.name))}}",
+    match: (to) => {
+        to.page = new {{model.name}}Page();
+        return true;
+    }
+});

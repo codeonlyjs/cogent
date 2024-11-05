@@ -23,8 +23,8 @@ main
 
 router.register({
     pattern: "/",
-    match: (r) => {
-        r.page = new HomePage();
+    match: (to) => {
+        to.page = new HomePage();
         return true;
     },
 });

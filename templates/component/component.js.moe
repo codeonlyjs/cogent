@@ -12,7 +12,7 @@ export class {{model.name}} extends Component
 
     static template = {
         type: "div",
-        class: {{helpers.dasherize(helpers.underscore(model.name))}},
+        class: "{{helpers.dasherize(helpers.underscore(model.name))}}",
         text: "My Component",
     }
 }

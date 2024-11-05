@@ -36,8 +36,8 @@ export class NotFoundPage extends Component
 
 
 router.register({
-    match: (r) => {
-        r.page = new NotFoundPage(r.url);
+    match: (to) => {
+        to.page = new NotFoundPage(to.url);
         return true;
     },
     order: 1000,
