@@ -1,7 +1,7 @@
 # Welcome to Your New CodeOnly Project!
 
 Due to the way CORS policy works with JavaScript modules, you need to serve the
-site from a server - you can't just open the index.html file.
+site from a server - you can't just open the `index.html` file.
 
 There's two ways to easily do this:
 
@@ -40,11 +40,13 @@ eg:
 Another way to run this project is to use VS Code with the 
 [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension.
 
-This approach give's automatic live reloading in the browser when you save files.
+This approach provides automatic live reloading in the browser when you save files.
 
 1. Open the project is VS Code
 2. Make sure the extension is installed
-3. Click the Go Live button (see Live Server documentation for more)
+3. Click the Go Live button 
+
+(see the Live Server documentation for more)
 
 
 
@@ -61,7 +63,8 @@ The project directory contains your client-side single-page app:
 * `Header` - the site header
 * `vite.config.js` - Vite configuration for bundling the production site
 * `favicon.svg` - favicon for the site (defaults to CodeOnly logo)
-* `logo.svg` - logo use in top-left of the site's header (defaults to CodeOnly logo)
+* `public/logo.svg` - logo use in top-left of the site's header (defaults to CodeOnly logo)
+
 
 
 ## Building for Distribution
