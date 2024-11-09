@@ -1,4 +1,3 @@
-
 {
   "name": "@codeonlyjs/cogent",
   "description": "CodeOnly GENerator Tool",
@@ -22,6 +21,7 @@
   },
   "preferGlobal": true,
   "dependencies": {
+    "@codeonlyjs/cogent": "github:codeonlyjs/cogent",
     "@toptensoftware/moe-js": "^0.4.0",
     "@toptensoftware/shex": "github:toptensoftware/shex",
     "inflection": "^3.0.0",

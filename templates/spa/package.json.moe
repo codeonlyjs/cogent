@@ -16,6 +16,7 @@ base: ./{{model.name}}/
   "dependencies": {
   },
   "devDependencies": {
+    "@codeonlyjs/cogent": "github:codeonlyjs/cogent",
     "@codeonlyjs/core": "codeonlyjs/core",
     "serve": "^14.2.4",
     "vite": "^5.4.9",
