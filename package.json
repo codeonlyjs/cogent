@@ -1,8 +1,8 @@
 
 {
-  "name": "@codeonlyjs/cli",
-  "description": "CodeOnly Command Line Tools",
-  "version": "0.0.1",
+  "name": "@codeonlyjs/cogent",
+  "description": "CodeOnly GENerator Tool",
+  "version": "0.0.3",
   "author": "Topten Software",
   "contributors": [
     {
@@ -12,13 +12,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/toptensoftware/inkscape-export"
+    "url": "https://github.com/codeonlyjs/cogent"
   },
   "license": "Apache-2.0",
   "type": "module",
   "main": "index.js",
   "bin": {
-    "inkscape-export": "./index.js"
+    "cogent": "./index.js"
   },
   "preferGlobal": true,
   "dependencies": {
