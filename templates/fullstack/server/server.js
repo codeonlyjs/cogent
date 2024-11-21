@@ -70,6 +70,7 @@ else
         replace: [
             { from: "./Main.js", to: "/Main.js" },
         ],
+        inYaFace: true,
         livereload: true,
     }));
 
