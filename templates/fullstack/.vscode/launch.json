@@ -9,6 +9,7 @@
             "request": "launch",
             "name": "nodemon",
             "runtimeExecutable": "nodemon",
+            "runtimeArgs": [ "-w", "${workspaceRoot}/server/" ],
             "program": "${workspaceRoot}/server/server.js",
             "restart": true,
             "console": "integratedTerminal",
