@@ -1,34 +1,29 @@
-import { Component, Style } from "@codeonlyjs/core";
+import { Component, css } from "@codeonlyjs/core";
 import { config } from "./config.js";
 
 // The main header
 export class Header extends Component
 {
     static template = {
-        _: "header",
-        id: "header",
+        type: "header #header",
         $: [
             {
-                _: "a",
-                class: "title",
-                attr_href: "/",
+                type: "a .title",
+                href: "/",
                 $: [
                     { 
                         type: "img", 
-                        attr_src: "/public/logo.svg",
+                        src: "/public/logo.svg",
                     },
                     config.appName,
                 ]
             },
             {
-                _: "div",
-                class: "buttons",
+                type: "div .buttons",
                 $: [
                     {
-                        type: "input",
-                        attr_type: "checkbox",
-                        attr_checked: window.stylish.darkMode ? "checked" : undefined,
-                        class: "theme-switch",
+                        type: "input type=checkbox .theme-switch",
+                        checked: window.stylish.darkMode ? "checked" : undefined,
                         on_click: () => window.stylish.toggleTheme(),
                     },
                 ]
@@ -37,7 +32,7 @@ export class Header extends Component
     }
 }
 
-Style.declare(`
+css`
 :root
 {
     --header-height: 50px;
@@ -93,4 +88,4 @@ Style.declare(`
         }
     }
 }
-`);
+`

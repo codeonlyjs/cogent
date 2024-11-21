@@ -1,7 +1,7 @@
 ---
 out: {{model.name}}Page.js
 ---
-import { Component, Style } from "@codeonlyjs/core";
+import { Component, css } from "@codeonlyjs/core";
 import { router } from "./router.js";
 
 export class {{model.name}}Page extends Component
@@ -12,17 +12,16 @@ export class {{model.name}}Page extends Component
     }
 
     static template = {
-        type: "div",
-        class: "{{helpers.dasherize(helpers.underscore(model.name))}}-page",
+        type: "div .{{helpers.dasherize(helpers.underscore(model.name))}}-page",
         text: "My Component",
     }
 }
 
-Style.declare(`
+css`
 .{{helpers.dasherize(helpers.underscore(model.name))}}-page
 {
 }
-`);
+`
 
 router.register({
     pattern: "/{{helpers.dasherize(helpers.underscore(model.name))}}",

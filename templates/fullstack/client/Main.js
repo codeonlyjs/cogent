@@ -1,4 +1,4 @@
-import { Component, Style } from "@codeonlyjs/core";
+import { Component, css } from "@codeonlyjs/core";
 import { router } from "./router.js";
 import { Header } from "./Header.js";
 
@@ -25,12 +25,10 @@ class Main extends Component
 
     static template = {
         type: "div",
-        id: "layoutRoot",
         $: [
             Header,
             {
-                type: "div",
-                id: "#layoutRoot",
+                type: "div #layoutRoot",
                 $: {
                     type: "embed-slot",
                     bind: "layoutSlot",
@@ -40,13 +38,13 @@ class Main extends Component
     }
 }
 
-Style.declare(`
+css`
 #layoutRoot
 {
     padding-top: var(--header-height);
 }
 
-`);
+`;
 
 // Main entry point, create Application and mount
 export function main()

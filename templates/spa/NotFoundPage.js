@@ -26,7 +26,7 @@ export class NotFoundPage extends Component
                 type: "p",
                 $: {
                     type: "a",
-                    attr_href: "/",
+                    href: "/",
                     text: "Return Home",
                 }
             }

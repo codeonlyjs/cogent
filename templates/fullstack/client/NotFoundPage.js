@@ -10,12 +10,10 @@ export class NotFoundPage extends Component
     }
 
     static template = {
-        type: "div",
-        class: "center",
+        type: "div .center",
         $: [
             {
-                type: "h1",
-                class: "danger",
+                type: "h1 .danger",
                 text: "Page not found! 😟",
             },
             {
@@ -25,8 +23,7 @@ export class NotFoundPage extends Component
             {
                 type: "p",
                 $: {
-                    type: "a",
-                    attr_href: "/",
+                    type: "a href='/'",
                     text: "Return Home",
                 }
             }

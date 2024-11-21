@@ -1,7 +1,7 @@
 ---
 out: {{model.name}}.js
 ---
-import { Component, Style } from "@codeonlyjs/core";
+import { Component, css } from "@codeonlyjs/core";
 
 export class {{model.name}} extends Component
 {
@@ -11,14 +11,13 @@ export class {{model.name}} extends Component
     }
 
     static template = {
-        type: "div",
-        class: "{{helpers.dasherize(helpers.underscore(model.name))}}",
+        type: "div .{{helpers.dasherize(helpers.underscore(model.name))}}",
         text: "My Component",
     }
 }
 
-Style.declare(`
+css`
 .{{helpers.dasherize(helpers.underscore(model.name))}}
 {
 }
-`);
+`;

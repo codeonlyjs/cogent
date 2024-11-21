@@ -1,4 +1,4 @@
-import { Component, Style, Html } from "@codeonlyjs/core";
+import { Component, css, $ } from "@codeonlyjs/core";
 import { router } from "./router.js";
 import { config } from "./config.js";
 
@@ -8,18 +8,18 @@ export class HomePage extends Component
         type: "main",
         class: "center",
         $: [
-            Html.h(1, `Welcome to ${config.appName} 😀`),
-            Html.p("It worked! Your new project is up and running!"),
+            $.h1(`Welcome to ${config.appName} 😀`),
+            $.p("It worked! Your new project is up and running!"),
         ]
     }
 }
 
-Style.declare(`
+css`
 main
 {
     padding-top: 50px;
 }
-`);
+`
 
 router.register({
     pattern: "/",
