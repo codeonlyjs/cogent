@@ -17,7 +17,7 @@ base: ./{{model.name}}/
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@toptensoftware/bundle-free": "^1.0.7",
+    "@codeonlyjs/bundle-free": "github:codeonlyjs/bundle-free",
     "express": "^4.21.1",
     "express-async-errors": "^3.1.1",
     "cookie-parser": "^1.4.6",

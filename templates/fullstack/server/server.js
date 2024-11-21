@@ -3,7 +3,7 @@ import url from 'node:url';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import 'express-async-errors';
-import { bundleFree } from '@toptensoftware/bundle-free';
+import { bundleFree } from '@codeonlyjs/bundle-free';
 import livereload from 'livereload';
 import logger from "morgan";
 
