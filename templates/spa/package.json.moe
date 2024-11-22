@@ -8,19 +8,20 @@ base: ./{{model.name}}/
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "dev": "serve",
-    "dist": "npm run build && serve dist"
+    "dev": "cosrv development",
+    "prod": "npm run build && cosrv production"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-  },
   "devDependencies": {
     "@codeonlyjs/cogent": "github:codeonlyjs/cogent",
     "@codeonlyjs/core": "codeonlyjs/core",
     "serve": "^14.2.4",
     "vite": "^5.4.9",
     "vite-plugin-static-copy": "^2.0.0"
+  },
+  "dependencies": {
+    "@codeonlyjs/cosrv": "github:codeonlyjs/cosrv"
   }
 }
 
