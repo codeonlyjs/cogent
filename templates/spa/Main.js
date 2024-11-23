@@ -1,5 +1,4 @@
-import { Component, css } from "@codeonlyjs/core";
-import { router } from "./router.js";
+import { Component, css, router } from "@codeonlyjs/core";
 import { Header } from "./Header.js";
 
 import "./HomePage.js";

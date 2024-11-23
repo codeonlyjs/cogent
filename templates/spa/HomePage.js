@@ -1,5 +1,4 @@
-import { Component, css, $ } from "@codeonlyjs/core";
-import { router } from "./router.js";
+import { Component, css, router, $ } from "@codeonlyjs/core";
 import { config } from "./config.js";
 
 export class HomePage extends Component

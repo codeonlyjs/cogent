@@ -1,8 +1,7 @@
 ---
 out: {{model.name}}Page.js
 ---
-import { Component, css } from "@codeonlyjs/core";
-import { router } from "./router.js";
+import { Component, css, router } from "@codeonlyjs/core";
 
 export class {{model.name}}Page extends Component
 {
