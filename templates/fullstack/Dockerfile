@@ -1,7 +1,7 @@
 FROM node:latest
 
 WORKDIR /usr/src/app/website
-COPY client/dist ./client/dist/
+COPY client ./client/
 COPY server ./server/
 COPY package* ./
 
