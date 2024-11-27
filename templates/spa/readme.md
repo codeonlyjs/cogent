@@ -6,7 +6,7 @@
 Due to the way CORS policy works with JavaScript modules, you need to serve the
 site from a server - you can't just open the `index.html` file.
 
-There's various ways to do this, but the easiest is with cosrv, CodeOnly's
+There's various ways to do this, but the easiest is with coserv, CodeOnly's
 simple file server.
 
 From a command prompt, in the project directory: 
@@ -50,7 +50,7 @@ This project is configured to run against specific version of CodeOnly.
 * When using a simple file server, the CodeOnly version is set by the CDN reference
   in the import map in `index.html`.
 
-* When building or using cosrv, the version is determined by the installed
+* When building or using coserv, the version is determined by the installed
   NPM package (see package.json). Use `npm install` to switch to a specific version:
 
   eg: to install version 0.0.73:
