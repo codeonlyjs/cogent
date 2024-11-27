@@ -19,18 +19,20 @@ Once running, you can view your site at <http://localhost:3000>
 
 The `client` directory contains the client side scripts for your app:
 
-* `index.html` - the root HTML document for the app
-* `Main.js` - the main entry point and top-level HTML layout of the site
+* `config.js` - config file with app name and description
 * `HomePage.js` - the home page component
+* `Header.js` - the site header bar
+* `index.html` - the HTML entry point for the app
+* `main_ssr.js` - the server-side entry point when using server-side rendering (SSR)
+* `Main.js` - the JavaScript entry point and top-level HTML layout of the site
+* `Meta.js` - meta information component (inserts title and meta tags in head section)
 * `NotFoundPage.js` - the error page if the router can't find a matching route
-* `router.js` - the router
-* `Header` - the site header
 * `vite.config.js` - Vite configuration for bundling the production site
 
 The `server` directory contains the ExpressJS server:
 
 * `server.js` - the main entry point to the server
-* `config.js` - configuration settings available to both the server and client apps
+* `config.js` - server side configuration
 * `api.js` - route handler for `/api` routes
 * `public\favicon.svg` - favicon for the site (defaults to CodeOnly logo)
 * `public\logo.svg` - logo use in top-left of the site's header (defaults to CodeOnly logo)
@@ -39,13 +41,14 @@ The `server` directory contains the ExpressJS server:
 
 ## Development vs Production Mode
 
-In development mode, the client app files are served directly by the ExpressJS.  It
-also serves configured NPM packages using [`bundle-free`](https://github.com/codeonlyjs/bundle-free) 
-(see server.js).
+In development mode:
 
-Also, in development mode the server runs [`live-reload`](https://www.npmjs.com/package/livereload) 
-so changes made in client folder are automatically reflected in connected browsers (see server.js for 
-configuration of live-reload).
+* The client app files are served directly by ExpressJS.  
+* Configured NPM packages are served using [`bundle-free`](https://github.com/codeonlyjs/bundle-free) 
+  (see server.js).
+* The server runs [`live-reload`](https://www.npmjs.com/package/livereload) so changes made in 
+  client folder are automatically reflected in connected browsers (see server.js for configuration
+  of live-reload).
 
 Note that in development mode, an automatically modified version the `client/index.html` 
 file is served by bundle-free with the following changes:
@@ -54,9 +57,22 @@ file is served by bundle-free with the following changes:
 * the live-reload script is added
 * other string replacements as configured in `server.js`
 
-In production mode, the client app is built/bundled using Vite and the server 
-serves the `client/dist` folder it produces.  The node_modules folder isn't
-served in production mode.
+In production mode:
+
+* the client app is built/bundled using Vite 
+* the server serves the `client/dist` folder.  The node_modules folder isn't
+  served in production mode.
+
+
+## Server Side Rendering
+
+The project is configured to support server side rendering but it is disabled by 
+default.  
+
+To enable SSR change the `ssr` setting in `./server/config.js` to true.
+
+Note: server side rendering is a complex topic - see the CodeOnly documentation
+for more information.
 
 
 

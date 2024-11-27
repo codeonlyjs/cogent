@@ -34,7 +34,7 @@ app.use("/", express.static(path.join(__dirname, "public")));
 app.use("/api", api);
 
 // NB: Routes should be registered before the following bundle-free code.
-// This is because bundle-free is configured to run "SPA" mode where 
+// This is because bundle-free is configured to run in "SPA" mode where 
 // unrecognized URLs cause client/index.html to be served.
 
 // Prod or Dev?
@@ -56,20 +56,34 @@ else
 
     // Module handling
     app.use(bf = bundleFree({
+        // File to serve
         path: path.join(__dirname, "../client"),
+
+        // When SSR we'll serve the files ourself, otherwise
+        // leave it to bundlefree
         spa: !config.ssr,
         default: config.ssr ? false : "index.html",
+
+        // NPM modules to make available client side
         modules: [ 
             "@codeonlyjs/core",
         ],
+
+        // Replacements in index.html.  
+        // "/Main.js" is required by the browser when serving SPA pages from a sub-path.
+        // "./Main.js" is required for Vite to find the file.
         replace: [
             { from: "./Main.js", to: "/Main.js" },
         ],
+
+        // Display errors in the browser client side
         inYaFace: true,
+
+        // Inject live reload script
         livereload: true,
     }));
 
-    // Live reload
+    // Live reload server
     let lrs = livereload.createServer({
     });
     lrs.watch([
@@ -79,10 +93,13 @@ else
 
 if (config.ssr)
 {
-    // Get the entry HTML file and inject bundle-free injections
+    // Get the entry HTML file and inject any bundle-free injections
     let entryHtml = await bf.patch_html_file("", path.join(bf.options.path, "index.html"));
 
-    // Create SSR Worker Thread
+    // Create SSR Worker Thread.
+    // SSR rendering runs in a worker thread to keep it isolated from other SSR apps.
+    // If you only have one SSR app, you can switch this to "SSRWorker" if you really 
+    // want but you run the risk of global namespace clashes.  Best keep it separate.
     let worker = new SSRWorkerThread();
     await worker.init({
         entryFile: path.join(__dirname, "../client/main_ssr.js"), 
@@ -91,6 +108,8 @@ if (config.ssr)
     });
 
     // SPA handler
+    // Anything not handled so far we assume is an SPA specific route so serve
+    // the index.html after injecting SSR content for the route.
     app.get(/\/.*/, async (req, res, next) => {
 
         // Only if asking for text/html

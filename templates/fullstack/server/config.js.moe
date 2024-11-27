@@ -2,7 +2,7 @@ export let config = {
 
     appName: "{{model.name}}",
 
-    ssr: true,
+    ssr: false,
 
     server: {
         port: 3000,
