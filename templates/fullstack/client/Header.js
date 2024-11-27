@@ -1,5 +1,5 @@
-import { Component, css } from "@codeonlyjs/core";
-import { config } from "/config.js";
+import { Component, css, html } from "@codeonlyjs/core";
+import { config } from "./config.js";
 
 // The main header
 export class Header extends Component
@@ -23,9 +23,14 @@ export class Header extends Component
                 $: [
                     {
                         type: "input type=checkbox .theme-switch",
-                        checked: window.stylish.darkMode ? "checked" : undefined,
                         on_click: () => window.stylish.toggleTheme(),
                     },
+                    {
+                        // Initialize the state of the theme-switch.
+                        // We do this as early as possible to prevent it flicking on/off as page hydrates.
+                        type: "script",
+                        text: html(`document.querySelector(".theme-switch").checked = window.stylish.darkMode;`),
+                    }                    
                 ]
             }
         ]

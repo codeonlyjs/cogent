@@ -1,22 +1,25 @@
 import { Component, css , router} from "@codeonlyjs/core";
 import { Header } from "./Header.js";
+import { Meta } from "./Meta.js";
 
 import "./HomePage.js";
 import "./NotFoundPage.js";
 
 // Main application
-class Main extends Component
+export class Main extends Component
 {
     constructor()
     {
         super();
+        this.page = null;
 
         router.addEventListener("didEnter", (from, to) => {
 
             // Load navigated page into router slot
             if (to.page)
             {
-                this.layoutSlot.content = to.page;
+                this.page = to.page;
+                this.invalidate();
             }
 
         });
@@ -30,7 +33,7 @@ class Main extends Component
                 type: "div #layoutRoot",
                 $: {
                     type: "embed-slot",
-                    bind: "layoutSlot",
+                    content: c => c.page,
                 }
             }
         ]
@@ -48,6 +51,7 @@ css`
 // Main entry point, create Application and mount
 export function main()
 {
+    new Meta().mount("head");
     new Main().mount("body");
     router.start();
 }

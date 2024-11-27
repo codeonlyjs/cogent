@@ -2,9 +2,9 @@ export let config = {
 
     appName: "{{model.name}}",
 
-    server: {
-        // Server specific settings go here and will not be passed to client
+    ssr: true,
 
+    server: {
         port: 3000,
         host: null,
     }

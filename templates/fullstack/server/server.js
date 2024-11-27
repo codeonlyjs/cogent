@@ -6,6 +6,7 @@ import 'express-async-errors';
 import { bundleFree } from '@codeonlyjs/bundle-free';
 import livereload from 'livereload';
 import logger from "morgan";
+import { SSRWorkerThread, prettyHtml } from '@codeonlyjs/core';
 
 import { config } from "./config.js";
 import { api } from "./api.js";
@@ -29,15 +30,6 @@ else
 // Serve static files
 app.use("/", express.static(path.join(__dirname, "public")));
 
-// Get "config.js"
-app.use("/config.js", (req, res) => {
-    let publicConfig = Object.assign({}, config);
-    delete publicConfig.server;
-    let js = `export let config = ${JSON.stringify(publicConfig, null, 4)};`;
-    res.setHeader('content-type', 'text/javascript');
-    res.send(js);
-}); 
-
 // Routes
 app.use("/api", api);
 
@@ -46,14 +38,16 @@ app.use("/api", api);
 // unrecognized URLs cause client/index.html to be served.
 
 // Prod or Dev?
+let bf;
 if (app.get('env') === 'production')
 {
     console.log("Running as production");
 
     // Serve bundled client
-    app.use(bundleFree({
+    app.use(bf = bundleFree({
         path: path.join(__dirname, "../client/dist"),
-        spa: true
+        spa: !config.ssr,
+        default: config.ssr ? false : "index.html",
     }));
 }
 else
@@ -61,9 +55,10 @@ else
     console.log("Running as development");
 
     // Module handling
-    app.use(bundleFree({
+    app.use(bf = bundleFree({
         path: path.join(__dirname, "../client"),
-        spa: true,
+        spa: !config.ssr,
+        default: config.ssr ? false : "index.html",
         modules: [ 
             "@codeonlyjs/core",
         ],
@@ -80,6 +75,40 @@ else
     lrs.watch([
         path.join(__dirname, "../client"),
     ]);
+}
+
+if (config.ssr)
+{
+    // Get the entry HTML file and inject bundle-free injections
+    let entryHtml = await bf.patch_html_file("", path.join(bf.options.path, "index.html"));
+
+    // Create SSR Worker Thread
+    let worker = new SSRWorkerThread();
+    await worker.init({
+        entryFile: path.join(__dirname, "../client/main_ssr.js"), 
+        entryMain: "main_ssr",
+        entryHtml,
+    });
+
+    // SPA handler
+    app.get(/\/.*/, async (req, res, next) => {
+
+        // Only if asking for text/html
+        if (req.headers.accept.split(",").indexOf("text/html") < 0)
+            return next();
+
+        // Server Side Render
+        let url = new URL(req.protocol + '://' + req.get('host') + req.originalUrl);
+        let html = await worker.render(url.href);
+
+        // In dev mode, prettify the html
+        if (app.get('env') !== 'production')
+            html = prettyHtml(html);
+
+        // Send it
+        res.send(html);
+
+    });
 }
 
 // Not found

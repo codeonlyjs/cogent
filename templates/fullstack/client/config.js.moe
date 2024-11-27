@@ -1,0 +1,5 @@
+export let config = {
+
+    appName: "{{model.name}}",
+    description: "{{model.name}} CodeOnly Project",
+}
