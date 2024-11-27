@@ -51,8 +51,19 @@ This project is configured to run against specific version of CodeOnly.
   in the import map in `index.html`.
 
 * When building or using cosrv, the version is determined by the installed
-  NPM package (see package.json) and use `npm update` to update to a newer or 
-  specific version.
+  NPM package (see package.json). Use `npm install` to switch to a specific version:
+
+  eg: to install version 0.0.73:
+
+  ```
+  npm install --save codeonlyjs/core#v0.0.73
+  ```
+
+  eg: to install latest:
+
+  ```
+  npm install --save codeonlyjs/core
+  ```
 
 
 ## Building for Distribution

@@ -64,6 +64,27 @@ In production mode:
   served in production mode.
 
 
+
+## CodeOnly Version
+
+This project is configured to run against specific version of CodeOnly.
+
+The version is determined by the installed NPM package (see package.json). 
+Use `npm install` to switch to a specific version:
+
+eg: to install version 0.0.73:
+
+```
+npm install --save codeonlyjs/core#v0.0.73
+```
+
+eg: to install latest:
+
+```
+npm install --save codeonlyjs/core
+```
+
+
 ## Server Side Rendering
 
 The project is configured to support server side rendering but it is disabled by 
