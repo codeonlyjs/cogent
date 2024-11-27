@@ -2,7 +2,7 @@
 base: ./{{model.name}}/
 ---
 {
-  "name": "{{model.name}}",
+  "name": "{{helpers.dasherize(helpers.underscore(model.name))}}",
   "version": "0.0.1",
   "description": "{{model.name}}",
   "main": "index.js",
@@ -18,7 +18,7 @@ base: ./{{model.name}}/
   "license": "ISC",
   "dependencies": {
     "@codeonlyjs/bundle-free": "github:codeonlyjs/bundle-free",
-    "@codeonlyjs/core": "codeonlyjs/core",
+    "@codeonlyjs/core": "codeonlyjs/core#v{{model.codeOnlyVersion}}",
     "express": "^4.21.1",
     "express-async-errors": "^3.1.1",
     "cookie-parser": "^1.4.6",

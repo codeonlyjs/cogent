@@ -1,52 +1,78 @@
 # Welcome to Your New CodeOnly Project!
 
+
+## Launching the Project
+
 Due to the way CORS policy works with JavaScript modules, you need to serve the
 site from a server - you can't just open the `index.html` file.
 
-There's two ways to easily do this:
+There's various ways to do this, but the easiest is with cosrv, CodeOnly's
+simple file server.
 
-* from the command prompt with `npx serve` (easiest for quick testing) or
-* from VS Code with the Live Server extensions (best for development as it 
-  has live reload capability).
+From a command prompt, in the project directory: 
+
+```
+~/Projects/MyCodeOnlyProject$ npm install
+~/Projects/MyCodeOnlyProject$ npm run dev
+```
+
+Running the project this way during development gives you:
+
+* Live reload
+* Overlaid error messages in the browser
+* Latest version of CodeOnly
 
 
+## Using a Simple File Server
 
-## Running with npx serve
+This project has been configured to be runnable using a simple file server.
 
-The easiest way to do this, if you have node installed is to run `npx serve`
-in the project directory.
-
-eg:
+For example, in the project directory:
 
 ```
 ~/Projects/MyCodeOnlyProject$ npx serve
-
-   ┌─────────────────────────────────────────┐
-   │                                         │
-   │   Serving!                              │
-   │                                         │
-   │   - Local:    http://localhost:3000     │
-   │   - Network:  http://172.20.64.1:3000   │
-   │                                         │
-   │   Copied local address to clipboard!    │
-   │                                         │
-   └─────────────────────────────────────────┘
 ```
-
-
-
-## Running in VS Code with Live Server
 
 Another way to run this project is to use VS Code with the 
 [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension.
-
-This approach provides automatic live reloading in the browser when you save files.
 
 1. Open the project is VS Code
 2. Make sure the extension is installed
 3. Click the Go Live button 
 
 (see the Live Server documentation for more)
+
+
+## CodeOnly Version
+
+This project is configured to run against specific version of CodeOnly.
+
+* When using a simple file server, the CodeOnly version is set by the CDN reference
+  in the import map in `index.html`.
+
+* When building or using cosrv, the version is determined by the installed
+  NPM package (see package.json) and use `npm update` to update to a newer or 
+  specific version.
+
+
+## Building for Distribution
+
+Once you're ready to ship your application you need to build it.  This will 
+bundle CodeOnly and your scripts into a single, optimized and minimized package.
+
+To run the build:
+
+```
+~/Projects/MyCodeOnlyProject$ npm install
+~/Projects/MyCodeOnlyProject$ npm run build
+```
+
+The output files will be placed in the `dist` sub-folder.  You can test it using
+`npm run prod`:
+
+```
+~/Projects/MyCodeOnlyProject$ npx run dist
+```
 
 
 
@@ -64,28 +90,6 @@ The project directory contains your client-side single-page app:
 * `vite.config.js` - Vite configuration for bundling the production site
 * `favicon.svg` - favicon for the site (defaults to CodeOnly logo)
 * `public/logo.svg` - logo use in top-left of the site's header (defaults to CodeOnly logo)
-
-
-
-## Building for Distribution
-
-Once you're ready to ship your application you need to build it.  This will 
-bundle CodeOnly and your scripts into a single, optimized and minimized package.
-
-To run the build:
-
-```
-~/Projects/MyCodeOnlyProject$ npm install
-~/Projects/MyCodeOnlyProject$ npm run build
-```
-
-The output files will be placed in the `dist` sub-folder.  You can test it using
-`npm run dist`:
-
-```
-~/Projects/MyCodeOnlyProject$ npx run dist
-```
-
 
 
 ## Stylish

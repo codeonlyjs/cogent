@@ -2,7 +2,7 @@
 base: ./{{model.name}}/
 ---
 {
-  "name": "{{model.name}}",
+  "name": "{{helpers.dasherize(helpers.underscore(model.name))}}",
   "version": "0.0.1",
   "description": "{{model.name}} Single Page App",
   "type": "module",
@@ -13,15 +13,15 @@ base: ./{{model.name}}/
   },
   "author": "",
   "license": "ISC",
+  "dependencies": {
+    "@codeonlyjs/core": "codeonlyjs/core#v{{model.codeOnlyVersion}}",
+    "@codeonlyjs/cosrv": "github:codeonlyjs/cosrv"
+  },
   "devDependencies": {
     "@codeonlyjs/cogent": "github:codeonlyjs/cogent",
-    "@codeonlyjs/core": "codeonlyjs/core",
     "serve": "^14.2.4",
     "vite": "^5.4.9",
     "vite-plugin-static-copy": "^2.0.0"
-  },
-  "dependencies": {
-    "@codeonlyjs/cosrv": "github:codeonlyjs/cosrv"
   }
 }
 

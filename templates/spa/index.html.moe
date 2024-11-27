@@ -2,11 +2,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{model.name}}</title>
     <script type="importmap">
     {
         "imports": {
-            "@codeonlyjs/core": "https://cdn.jsdelivr.net/gh/codeonlyjs/core@0/codeonly.js"
+            "@codeonlyjs/core": "https://cdn.jsdelivr.net/gh/codeonlyjs/core@v{{model.codeOnlyVersion}}/dist/codeonly.js"
         }
     }
     </script>

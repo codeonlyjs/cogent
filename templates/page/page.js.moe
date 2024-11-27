@@ -12,7 +12,7 @@ export class {{model.name}}Page extends Component
 
     static template = {
         type: "div .{{helpers.dasherize(helpers.underscore(model.name))}}-page",
-        text: "My Component",
+        text: "TODO: {{model.name}} page",
     }
 }
 

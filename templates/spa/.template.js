@@ -1,6 +1,11 @@
 import shex from "@toptensoftware/shex";
 
 
+export function preGenerate(template)
+{
+    template.params.codeOnlyVersion = "0.0.72";
+}
+
 export function postWrite(template)
 {
     let $ = shex({
@@ -8,6 +13,7 @@ export function postWrite(template)
         stdio: 'inherit',
     });
 
+ 
     // Launch VS Code (if installed)
     if ($.which("code", {nothrow: true}))
     {
