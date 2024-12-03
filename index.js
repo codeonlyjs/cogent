@@ -5,6 +5,7 @@ import url from 'node:url';
 import fs from "node:fs";
 import inflection from 'inflection';
 import moe from "@toptensoftware/moe-js";
+import { clargs } from "@toptensoftware/clargs";
 import { parse } from "yaml";
 
 // Get dirname
@@ -34,57 +35,60 @@ async function loadTemplate(name)
 }
 
 // Parse arguments and return a template to process
-async function parseArgs(args)
+async function parseArgs()
 {
+    let args = clargs();
+
     let template;
 
     // Check command line args
-    for (let i=0; i<args.length; i++)
+    while (args.next())
     {
-        var a = args[i];
-
-        if (a.startsWith("--"))
+        switch (args.name)
         {
-            isSwitch = true;
-            a = a.substring(2);
+            case "help":
+                showHelp();
+                process.exit(0);
 
-            var parts = a.split(':');
-            switch (parts[0])
-            {
-                case "help":
-                    showHelp();
-                    process.exit(0);
+            case "version":
+                showVersion();
+                process.exit(0);
 
-                case "version":
-                    showVersion();
-                    process.exit(0);
-
-                default:
-                    throw new Error(`Unknown command line arg: ${args[i]}`);
-            }
-        }
-        else
-        {
-            if (a == "new")
-            {
-                if (template)
-                    throw new Error("Multiple `new` commands found");
-                
-                // Load the template
-                i++;
-                template = await loadTemplate(args[i]);
-
-                // Does the name argument follow?
-                if (args[i+1] && !args[i+1].startsWith("--"))
+            case null:
+                if (args.value == "new")
                 {
-                    i++;
-                    template.params.name = args[i];
+                    if (template)
+                        throw new Error("Multiple `new` commands found");
+                    
+                    // Next argument
+                    if (!args.next() || args.name)
+                        throw new Error("Missing template name after `new`");
+
+                    // Load template
+                    template = await loadTemplate(args.value);
+
+                    // Load name parameter
+                    let cap = args.capture();
+                    if (args.next() && !args.name)
+                    {
+                        template.params.name = args.value;
+                    }
+                    else
+                    {
+                        args.restore(cap);
+                    }
+
+                    continue;
                 }
 
-                continue;
-            }
+                throw new Error(`Unknown command line arg: ${args.value}`);
 
-            throw new Error(`Unknown command line arg: ${args[i]}`);
+            default:
+                if (template)
+                    template.params[args.name] = args.value;
+                else
+                    throw new Error(`Unknown command line arg: ${args.name}`);
+                break;
         }
     }
 
@@ -225,7 +229,7 @@ async function generateTemplate(template)
 }
 
 // Parse args
-let template = await parseArgs(process.argv.slice(2));
+let template = await parseArgs();
 if (template)
 {
     await generateTemplate(template);
