@@ -8,8 +8,8 @@ base: ./{{model.name}}/
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "dev": "coserv development",
-    "prod": "npm run build && coserv production"
+    "dev": "coserv --dev",
+    "prod": "npm run build && coserv --prod"
   },
   "author": "",
   "license": "ISC",
