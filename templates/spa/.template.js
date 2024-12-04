@@ -7,7 +7,7 @@ export function describe()
 
 export function preGenerate(template)
 {
-    template.params.codeOnlyVersion = "0.0.72";
+    template.params.codeOnlyVersion = "0.0.84";
 }
 
 export function postWrite(template)
