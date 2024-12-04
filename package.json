@@ -2,6 +2,7 @@
   "name": "@codeonlyjs/cogent",
   "description": "CodeOnly GENerator Tool",
   "version": "0.0.4",
+  "copyright": "Copyright © 2024-present codeonlyjs.org",
   "author": "Topten Software",
   "contributors": [
     {

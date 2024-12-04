@@ -1,5 +1,10 @@
 import shex from "@toptensoftware/shex";
 
+export function describe()
+{
+    return "Generates a new Component designed to be used as a page in an SPA";
+}
+
 
 export function postWrite(template)
 {

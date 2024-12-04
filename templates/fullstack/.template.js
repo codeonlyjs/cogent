@@ -1,10 +1,15 @@
 import shex from "@toptensoftware/shex";
 
+export function describe()
+{
+    return "Generates a new full-stack project";
+}
+
+
 export function preGenerate(template)
 {
     template.params.codeOnlyVersion = "0.0.72";
 }
-
 
 export function postWrite(template)
 {
