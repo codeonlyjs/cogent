@@ -1,4 +1,4 @@
-import { Component, router, $, getEnv } from "@codeonlyjs/core";
+import { Component, router, $ } from "@codeonlyjs/core";
 import { config } from "./config.js"
 
 export class Meta extends Component
@@ -9,7 +9,7 @@ export class Meta extends Component
 
         router.addEventListener("didEnter", (from, to) => {
             this.invalidate();
-            if (getEnv().browser)
+            if (coenv.browser)
                 document.title = this.title;
         });
     }
