@@ -23,9 +23,9 @@ function showHelp()
 
     console.log("\nOptions:");
     showArgs({
+        "<command>":     "Command to execute",
         "-v, --version": "Show version info",
         "-h, --help":    "Show this help",
-        "<command>":     "Command to execute",
     });
 
     console.log("\nCommand:");
