@@ -1,7 +1,7 @@
 {
   "name": "@codeonlyjs/cogent",
   "description": "CodeOnly GENerator Tool",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "copyright": "Copyright © 2024-present codeonlyjs.org",
   "author": "Topten Software",
   "contributors": [
@@ -23,7 +23,7 @@
   "preferGlobal": true,
   "dependencies": {
     "@codeonlyjs/cogent": "github:codeonlyjs/cogent",
-    "@toptensoftware/clargs": "github:toptensoftware/clargs#semver:^0.0.5",
+    "@toptensoftware/clargs": "github:toptensoftware/clargs",
     "@toptensoftware/moe-js": "^0.4.0",
     "@toptensoftware/shex": "github:toptensoftware/shex",
     "inflection": "^3.0.0",
