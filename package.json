@@ -23,7 +23,7 @@
   "preferGlobal": true,
   "dependencies": {
     "@codeonlyjs/cogent": "github:codeonlyjs/cogent",
-    "@toptensoftware/clargs": "github:toptensoftware/clargs",
+    "@toptensoftware/clargs": "github:toptensoftware/clargs#semver:^0.0.5",
     "@toptensoftware/moe-js": "^0.4.0",
     "@toptensoftware/shex": "github:toptensoftware/shex",
     "inflection": "^3.0.0",
