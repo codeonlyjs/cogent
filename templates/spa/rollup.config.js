@@ -3,7 +3,7 @@ import { rollupPluginHTML as html } from '@web/rollup-plugin-html';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import terser from '@rollup/plugin-terser';
-import copy from 'rollup-plugin-copy';
+import { copy } from '@web/rollup-plugin-copy';
 import replace from '@rollup/plugin-replace';
 import { readFileSync } from 'fs';
 
@@ -38,10 +38,8 @@ export default {
     }),
     commonjs(),
     terser(),
-    copy({
-      targets: [
-        { src: './public/**/*', dest: 'dist/public' },
-      ]
-    })
+    copy({ 
+      patterns: './public/**/*' 
+    }),
   ],
 };
