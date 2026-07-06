@@ -14,14 +14,15 @@ base: ./{{model.name}}/
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@codeonlyjs/core": "codeonlyjs/core#semver:^{{model.codeOnlyVersion}}"
+    "@codeonlyjs/core": "codeonlyjs/core#semver:^{{model.codeOnlyVersion}}",
+    "@codeonlyjs/stylish": "github:codeonlyjs/stylish"
   },
   "devDependencies": {
-   "@codeonlyjs/cogent": "github:codeonlyjs/cogent",
+    "@codeonlyjs/cogent": "github:codeonlyjs/cogent",
     "@codeonlyjs/coserv": "github:codeonlyjs/coserv",
-    "@rollup/plugin-replace": "^6.0.3",
     "@rollup/plugin-commonjs": "^29.0.3",
     "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-replace": "^6.0.3",
     "@rollup/plugin-terser": "^1.0.0",
     "@web/rollup-plugin-html": "^3.1.0",
     "rollup": "^4.62.2",

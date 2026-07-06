@@ -1,4 +1,5 @@
 export let config = {
     appName: "{{model.name}}",
     description: "{{model.name}} CodeOnly Project",
+    version: __PACKAGE_VERSION__,
 }

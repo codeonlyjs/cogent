@@ -9,6 +9,7 @@ export class HomePage extends Component
         $: [
             $.h1(`Welcome to ${config.appName} 😀`),
             $.p("It worked! Your new project is up and running!"),
+            $.p(`Version ${config.version}`),        
         ]
     }
 }

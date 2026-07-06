@@ -7,11 +7,14 @@ import copy from 'rollup-plugin-copy';
 import replace from '@rollup/plugin-replace';
 import { readFileSync } from 'fs';
 
+// Read package version
 const pkg = JSON.parse(readFileSync('./package.json', 'utf8'));
 
+// Remap any direct /module urls to /node_modules 
+const rawHtml = readFileSync("./index.html", "utf8");
+const mappedHtml = rawHtml.replace(/\/modules/g, "/node_modules/");
 
 export default {
-  input: './index.html',
   output: {
     dir: 'dist',
     format: 'es',
@@ -21,6 +24,7 @@ export default {
   },
   plugins: [
     html({
+      input: { html: mappedHtml, name: 'index.html' },
       rootDir: '.',
       publicPath: '/',
     }),
