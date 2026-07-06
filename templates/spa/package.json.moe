@@ -14,7 +14,7 @@ base: ./{{model.name}}/
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@codeonlyjs/core": "codeonlyjs/core#semver:^{{model.codeOnlyVersion}}",
+    "@codeonlyjs/core": "github:codeonlyjs/core",
     "@codeonlyjs/stylish": "github:codeonlyjs/stylish"
   },
   "devDependencies": {
