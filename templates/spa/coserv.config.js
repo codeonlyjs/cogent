@@ -1,13 +1,13 @@
 const config = {
     development: {
-        bundleFree: {
-            modules: [ 
-                "@codeonlyjs/core",
-            ],
-            replace: [
-                { from: "./Main.js", to: "/Main.js" },
-            ],
-        },
+        modules: [ 
+            "*" 
+        ],
+        replace: [
+            { from: "./Main.js", to: "/Main.js" },
+        ],
+    },
+    production: {
     }
 };
 
